@@ -1,0 +1,16 @@
+[features]
+seeds = false
+[programs.localnet]
+coin_flip = "6dnQvFdv2Wgu3mD977Yur7z9ThrDWnhTVM5RjvwwH9My"
+[programs.devnet]
+coin_flip = "6dnQvFdv2Wgu3mD977Yur7z9ThrDWnhTVM5RjvwwH9My"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "/root/coin-flip/keypair.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

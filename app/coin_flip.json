@@ -1,0 +1,261 @@
+{
+  "version": "0.1.0",
+  "name": "coin_flip",
+  "instructions": [
+    {
+      "name": "init",
+      "accounts": [
+        {
+          "name": "coinFlip",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vendor",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "player",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "setup",
+      "accounts": [
+        {
+          "name": "coinFlip",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vendor",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenFrom",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        },
+        {
+          "name": "tokenTo",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "player",
+          "type": "publicKey"
+        },
+        {
+          "name": "betAmount",
+          "type": "u64"
+        },
+        {
+          "name": "vendorSeed",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "play",
+      "accounts": [
+        {
+          "name": "coinFlip",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "player",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenFrom",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        },
+        {
+          "name": "tokenTo",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        },
+        {
+          "name": "vendorTokenAccount",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        },
+        {
+          "name": "vendor",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "CHECK"
+          ]
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "playerChoice",
+          "type": "u8"
+        },
+        {
+          "name": "playerSeed",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "delete",
+      "accounts": [
+        {
+          "name": "coinFlip",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vendor",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "CoinFlip",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "players",
+            "type": {
+              "array": [
+                "publicKey",
+                2
+              ]
+            }
+          },
+          {
+            "name": "vendorSeed",
+            "type": "i64"
+          },
+          {
+            "name": "state",
+            "type": {
+              "defined": "CoinFlipState"
+            }
+          },
+          {
+            "name": "betAmount",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "CoinFlipState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Finished",
+            "fields": [
+              {
+                "name": "winner",
+                "type": "publicKey"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Side",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Heads"
+          },
+          {
+            "name": "Tails"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "BetTooSmall",
+      "msg": "Bet amount is too small"
+    }
+  ],
+  "metadata": {
+    "address": "6dnQvFdv2Wgu3mD977Yur7z9ThrDWnhTVM5RjvwwH9My"
+  }
+}
